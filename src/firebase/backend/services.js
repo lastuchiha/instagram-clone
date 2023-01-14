@@ -1,6 +1,6 @@
 import { auth, db, storage } from "./config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
-import { addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, query, runTransaction, serverTimestamp, setDoc, updateDoc, where, writeBatch } from "firebase/firestore";
+import { addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, query, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 
 
@@ -133,7 +133,7 @@ export const getFeed = async (username) => {
     const user = await getUserDataByUsername(username)
     if (!user)
         throw Error("Something went wrong");
-    console.log(user)
+
     const q = query(collection(db, "posts"), where("postedBy", "in", user.following))
 
     const queryResult = await getDocs(q)

@@ -34,7 +34,6 @@ export default function useFollow(user, username, isUserFollowing) {
         catch (err) {
             dispatch({ type: ACTIONS.ERROR })
         }
-
     }
 
     return { followState, handleFollow }

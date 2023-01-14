@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { getSuggestions } from '../../firebase/backend/services'
 import Suggestion from './components/suggestion'
 
@@ -21,7 +21,7 @@ export default function Suggestions({ username }) {
         }
 
         getSuggestedProfiles()
-    }, [])
+    }, [username])
 
     return (
         <div className="p-4 hidden sm:block">
