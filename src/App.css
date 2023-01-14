@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    html, body, #root{
+        @apply h-full
+    }
+
+    body{
+        background-color: #FAFAFA;
+        @apply text-xs 
+    }
+    
+    #root {
+        @apply flex flex-col
+    }
+
+
+    a, svg {
+        cursor: pointer;
+    }
+
+    ul li {
+        cursor: pointer;
+    }
+}
+
+@layer components {
+    .input {
+        @apply w-full p-2 rounded outline-none border mb-2  bg-lightGray text-xs
+    }
+
+    .btn {
+        @apply p-2 text-white bg-blue rounded text-sm font-semibold
+    }
+
+    .btn-invalid {
+        @apply cursor-default bg-lightBlue
+    }
+
+    .input-with-placeholder > ::placeholder{
+       @apply font-bold
+    }
+    
+
+}
