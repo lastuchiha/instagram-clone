@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import formatTime from "../../../helpers/formatTime"
 
-export default function Actions({ likeCount, setLikeCount, userLiked, setUserLiked, doLike, dispatch }) {
+export default function Actions({ likeCount, userLiked, doLike, dispatch, postedAt }) {
 
     const [toggleLike, setToggleLike] = useState(userLiked)
+    // console.log(timeStamp)
 
     useEffect(() => {
         if (toggleLike === userLiked)
@@ -35,6 +37,7 @@ export default function Actions({ likeCount, setLikeCount, userLiked, setUserLik
                 </svg>
             </div>
             <h1 className='font-bold pl-1 select-none'>{`${likeCount} like${likeCount === 1 ? '' : 's'}`}</h1>
+            <p className='text-gray-500 text-xs px-1'>{formatTime(postedAt)}</p>
         </div>
     )
 }

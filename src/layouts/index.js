@@ -8,7 +8,7 @@ export default function Layout() {
     return (
         <>
             <Header />
-            <main className='grow md:w-3/4 w-full mt-2 mx-auto'>
+            <main className='grow md:w-3/4 w-full mt-[60px] mx-auto'>
                 <Outlet />
             </main>
         </>

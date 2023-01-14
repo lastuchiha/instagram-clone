@@ -13,7 +13,7 @@ export default function Header() {
     const user = useContext(UserContext)
 
     return (
-        <header className='flex items-center justify-between border-b p-3 bg-white w-full sticky top-0 z-30 lg:px-20 '>
+        <header className='flex items-center justify-between border-b p-3 bg-white w-full fixed top-0 z-30 lg:px-20 '>
             <div className="w-24 select-none">
                 <Link to={ROUTES.DASHBOARD}>
                     <img src="/images/logo.png" alt="instagram-logo" className="w-24 cursor-pointer" />

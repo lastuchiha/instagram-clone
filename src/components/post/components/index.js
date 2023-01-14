@@ -7,15 +7,15 @@ import Container from "./container"
 import Head from "./head"
 
 
-export default memo(function Post({ userId, postId, profileMode }) {
+export default memo(function Post({ userId, postId }) {
     const { post, ...actions } = usePost(userId, postId)
 
     return (
         <Container isLoading={!post}>
-            {!profileMode && <Head postedBy={post?.postedBy} />}
+            <Head postedBy={post?.postedBy} />
             <Body imageUrl={post?.imageUrl} />
-            {!profileMode && <Actions {...actions} />}
-            {!profileMode && <Comment />}
+            <Actions {...actions} postedAt={post?.postedAt} />
+            <Comment />
         </Container>
 
     )

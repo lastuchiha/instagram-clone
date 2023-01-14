@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { getSuggestions } from '../../firebase/backend/services'
 import Suggestion from './components/suggestion'
 
@@ -26,7 +27,7 @@ export default function Suggestions({ username }) {
     return (
         <div className="p-4 hidden sm:block">
             <h1 className='font-semibold'>Suggestion for you</h1>
-            {state.loading ? null :
+            {state.loading ? <Skeleton count={4} className="mt-2 py-2" /> :
                 state.suggestedProfiles.map(suggestedProfile => {
                     return <Suggestion key={suggestedProfile.username} profile={suggestedProfile} />
                 })}
