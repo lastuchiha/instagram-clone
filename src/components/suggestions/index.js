@@ -16,6 +16,7 @@ export default function Suggestions({ username }) {
     useEffect(() => {
         const getSuggestedProfiles = async () => {
             const suggestedProfiles = await getSuggestions(username)
+            console.log(suggestedProfiles)
             dispatch({ suggestedProfiles, loading: false })
         }
 

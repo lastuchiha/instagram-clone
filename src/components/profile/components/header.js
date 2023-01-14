@@ -1,43 +1,14 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { EDIT } from '../../../constants/routes'
 import UserContext from "../../../contexts/user"
 import { Link } from "react-router-dom"
-import { followOrUnfollowUser } from '../../../firebase/backend/services'
-const ACTIONS = {
-    LOAD: 1,
-    ERROR: 2,
-    SET_FOLLOWING: 3
-}
+import useFollow from '../../../hooks/useFollow'
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case ACTIONS.LOAD:
-            return { ...state, loading: true }
-
-        case ACTIONS.ERROR:
-            return { ...state, error: true, loading: false }
-
-        case ACTIONS.SET_FOLLOWING:
-            return { following: !state.following, loading: false, error: false }
-
-    }
-}
 export default function ProfileHeader({ username, fullName, profileUrl, postCount, followerCount, isOfficial, followingCount, bio, isUserFollowing }) {
-    const [followState, dispatch] = useReducer(reducer, { following: isUserFollowing, loading: false })
     const [count, setCount] = useState(followerCount)
     const user = useContext(UserContext)
+    const { followState, handleFollow } = useFollow(user, username, isUserFollowing)
 
-    const handleFollow = async () => {
-        try {
-            dispatch({ type: ACTIONS.LOAD })
-            await followOrUnfollowUser(user.username, username, !followState.following) //if pres follow state if false then we should follow user
-            dispatch({ type: ACTIONS.SET_FOLLOWING })
-        }
-        catch (err) {
-            dispatch({ type: ACTIONS.ERROR })
-        }
-
-    }
 
     useEffect(() => {
         const updateFollowerCount = () => {
@@ -46,7 +17,7 @@ export default function ProfileHeader({ username, fullName, profileUrl, postCoun
             return followerCount
         }
         setCount(updateFollowerCount())
-    }, [followState])
+    }, [followState, isUserFollowing, followerCount])
 
 
     return (
@@ -61,7 +32,7 @@ export default function ProfileHeader({ username, fullName, profileUrl, postCoun
                         user.username === username ?
                             <Link to={EDIT}><button className='bg-white border text-black p-2 rounded font-semibold'>Edit Profile</button></Link>
 
-                            : <button onClick={handleFollow} disabled={followOrUnfollowUser.loading}
+                            : <button onClick={handleFollow} disabled={followState.loading}
                                 className={`p-2 rounded w-20 text-xs font-semibold
                         ${!followState.following ? 'bg-blue text-white' : 'bg-white outline outline-1 outline-gray-200 text-black'}`}>
                                 {followState.following ? "Following" : "Follow"}

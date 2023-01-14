@@ -61,9 +61,12 @@ export const getUserDetailsByUid = async (uid) => {
 }
 
 export const getSuggestions = async (username) => {
+    const { following } = await getUserDataByUsername(username)
+
     const q = query(collection(db, "users"),
-        where("username", "!=", username),
+        where("username", "not-in", [...following, username]),
         limit(3))
+
     const queryResult = await getDocs(q)
     return queryResult.docs.map(doc => doc.data())
 }
@@ -80,11 +83,8 @@ export const followOrUnfollowUser = async (who, whom, follow) => {
     batch.update(doc(db, "users", who), { following: follow ? arrayUnion(whom) : arrayRemove(whom) })
     batch.update(doc(db, "users", whom), { followers: follow ? arrayUnion(who) : arrayRemove(who) })
 
-    let res = await batch.commit()
-    console.log(res)
+    await batch.commit()
 }
-
-
 
 
 export const getPost = async (postId) => {
@@ -108,9 +108,7 @@ export const uploadFile = async (path, file) => {
     return await getDownloadURL(fileRef)
 }
 
-export const checkCurrentUserFollowsUsername = async (currentUser, username) => {
-    const q = query(collection(db, "users"),)
-}
+
 
 export const submitPost = async (img, postedBy) => {
     const postRef = collection(db, "posts")
