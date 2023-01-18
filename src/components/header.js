@@ -16,7 +16,7 @@ export default function Header() {
         <header className='flex items-center justify-between border-b p-3 bg-white w-full fixed top-0 z-30 lg:px-20 '>
             <div className="w-24 select-none">
                 <Link to={ROUTES.DASHBOARD}>
-                    <img src="/images/logo.png" alt="instagram-logo" className="w-24 cursor-pointer" />
+                    <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="instagram-logo" className="w-24 cursor-pointer" />
                 </Link>
             </div>
             <Search />
@@ -31,7 +31,7 @@ export default function Header() {
                         </li>
                         <li>
                             <Link className='block' to={generatePath(ROUTES.PROFILE, { username: user.username })}>
-                                <img src={user.profileUrl} className='w-6 h-6 rounded-full' />
+                                <img src={user.profileUrl || process.env.PUBLIC_URL + "/DEFAULT.png"} className='w-6 h-6 rounded-full' />
                             </Link>
                         </li>
                         <li onClick={signOutService}>

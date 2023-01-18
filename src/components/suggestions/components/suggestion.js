@@ -11,7 +11,7 @@ export default function Suggestion({ profile }) {
     return (
         <div className='flex items-center justify-center p-1  w-48'>
             <div className="w-10 h-10 flex items-center justify-center">
-                <img src={profile.profileUrl} alt={profile.username + "-profile-pic"} className="w-6 aspect-square rounded-full" />
+                <img src={profile.profileUrl || process.env.PUBLIC_URL + "/DEFAULT.png"} alt={profile.username + "-profile-pic"} className="w-6 aspect-square rounded-full" />
             </div>
 
             <div className="grow flex  items-center justify-between">

@@ -30,7 +30,7 @@ export const signUpService = async (email, fullName, username, password) => {
             following: [],
             followers: [],
             posts: [],
-            profileUrl: '/DEFAULT.png',
+            profileUrl: '',
             isPrivate: false,
             isOfficial: false,
             bio: ''
