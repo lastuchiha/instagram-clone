@@ -27,7 +27,8 @@ export default function Suggestions({ username }) {
     return (
         <div className="p-4 hidden sm:block">
             <h1 className='font-semibold'>Suggestion for you</h1>
-            {state.loading ? <Skeleton count={4} className="mt-2 py-2" /> :
+            {state.loading ?
+                <Skeleton count={4} className="p-1 mt-1" /> :
                 state.suggestedProfiles.map(suggestedProfile => {
                     return <Suggestion key={suggestedProfile.username} profile={suggestedProfile} />
                 })}

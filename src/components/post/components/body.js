@@ -8,7 +8,7 @@ export default function Body({ imageUrl }) {
             {imgLoading && <Skeleton className='w-full aspect-square' />}
             <img
                 src={imageUrl} alt="img"
-                className='max-w-full object-cover aspect-square select-none'
+                className='w-full object-cover aspect-square select-none'
                 onLoad={() => setImgLoading(false)}
             />
         </div>

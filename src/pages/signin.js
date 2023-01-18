@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Password from '../components/password'
 import { signInService } from '../firebase/backend/services'
 import { DASHBOARD, SIGNUP } from '../constants/routes'
+import { RotatingLines } from 'react-loader-spinner'
 
 export default function Signin() {
     const navigate = useNavigate()
@@ -10,6 +11,7 @@ export default function Signin() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [err, setErr] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const invalid = username === '' || password.length < 6
 
@@ -17,14 +19,19 @@ export default function Signin() {
         e.preventDefault()
         if (invalid) return;
 
+        setLoading(true)
+
         try {
-            const user = await signInService(username, password)
+            await signInService(username, password)
             navigate(DASHBOARD)
 
         } catch (err) {
             setUsername('')
             setPassword('')
-            setErr(err.message)
+            setErr("Invalid Email or Password")
+        }
+        finally {
+            setLoading(false)
         }
     }
 
@@ -39,7 +46,9 @@ export default function Signin() {
                     <form className='flex flex-col justify-center w-full' onSubmit={handleSubmit}>
                         <input onChange={e => setUsername(e.target.value)} value={username} type="text" className="input" placeholder='Phone number, email or username' />
                         <Password password={password} setPassword={setPassword} />
-                        <button disabled={invalid} className={`w-full btn ${invalid ? 'btn-invalid' : ''} my-3`}>Log in</button>
+                        <button disabled={invalid || loading} className={`w-full btn ${invalid || loading ? 'btn-invalid' : ''} my-3 flex items-center justify-center`}>
+                            <RotatingLines width='20' visible={loading} strokeColor={"white"} strokeWidth="3" animationDuration="0.75" />
+                            {loading ? "Logging in" : "Log in"}</button>
                         {err && <p className="text-red text-center my-5 text-xs">{err}</p>}
                         <span className='text-center'><a href="/" className="text-link text-xs">Forgot password?</a></span>
                     </form>

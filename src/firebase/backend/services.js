@@ -1,6 +1,6 @@
 import { auth, db, storage } from "./config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
-import { addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, query, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
+import { addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 
 
@@ -56,7 +56,7 @@ export const getUsernameByUID = async (uid) => {
 
 export const getUserDetailsByUid = async (uid) => {
     const usersRef = doc(db, "users", uid)
-    const userData = await (await getDoc(usersRef)).data()
+    const userData = (await getDoc(usersRef)).data()
     return userData
 }
 
@@ -134,7 +134,11 @@ export const getFeed = async (username) => {
     if (!user)
         throw Error("Something went wrong");
 
-    const q = query(collection(db, "posts"), where("postedBy", "in", user.following))
+    if (!user.following.length) {
+        return []
+    }
+
+    const q = query(collection(db, "posts"), where("postedBy", "in", user.following), orderBy("postedAt", "desc"))
 
     const queryResult = await getDocs(q)
     return queryResult.docs.map(doc => doc.id)

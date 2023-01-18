@@ -4,6 +4,7 @@ import Password from '../components/password'
 import { checkUsernameExists, signUpService } from '../firebase/backend/services'
 import { DASHBOARD, LOGIN } from '../constants/routes'
 import * as ERRORS from '../constants/error-msgs'
+import { RotatingLines } from 'react-loader-spinner'
 
 export default function Signup() {
     const navigate = useNavigate()
@@ -13,10 +14,12 @@ export default function Signup() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [err, setErr] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const invalid = username === '' || fullName === '' || email === '' || password.length < 6
 
     const handleSubmit = async (e) => {
+        setLoading(true)
         try {
             e.preventDefault()
             const doUsernameExists = await checkUsernameExists(username)
@@ -29,6 +32,8 @@ export default function Signup() {
         }
         catch (err) {
             setErr(err.message)
+        } finally {
+            setLoading(false)
         }
 
     }
@@ -47,7 +52,9 @@ export default function Signup() {
 
                         <input onChange={e => setUsername(e.target.value)} type="text" className="input" placeholder='Username' />
                         <Password password={password} setPassword={setPassword} />
-                        <button disabled={invalid} className={`w-full btn ${invalid ? 'btn-invalid' : ''} my-3`}>Sign Up</button>
+                        <button disabled={invalid || loading} className={`w-full btn ${invalid || loading ? 'btn-invalid' : ''} my-3 flex items-center justify-center gap-x-3`}>
+                            <RotatingLines width='20' visible={loading} strokeColor={"white"} strokeWidth="3" animationDuration="0.75" />
+                            {loading ? 'Signing Up' : 'Sign Up'}</button>
                         {err && <p className="text-red text-center my-5 text-xs">{err}</p>}
                         <span className='text-center text-xs'>By signing up, you agree to our Terms , <a href="/" className="text-link">Privacy Policy and Cookies Policy .</a></span>
                     </form>

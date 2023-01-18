@@ -27,7 +27,7 @@ export default function Home() {
             <div className="col-span-3 sm:col-span-2 p-5 overflow-auto">
                 {feed ?
                     feed.map(postId => <Post userId={user.username} key={postId} postId={postId} />) :
-                    <Skeleton className='aspect-[4/5] mb-5' />
+                    <Skeleton className='aspect-[4/5] mb-5' count={2} />
                 }
                 <hr />
                 <NoFeed />

@@ -10,6 +10,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^4.6.3",
+    "react-loader-spinner": "^5.3.4",
     "react-loading-skeleton": "^3.1.0",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",

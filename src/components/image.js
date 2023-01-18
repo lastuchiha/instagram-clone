@@ -5,13 +5,11 @@ import usePhoto from '../hooks/use-photo'
 export default function Image({ postId }) {
     const data = usePhoto(postId);
 
-    console.log(data)
-
     return (
         <div className='w-[33%] min-w-[200px] grow sm:grow-0 relative'>
             {data ?
                 <>
-                    <img src={data.imageUrl} alt={postId} className="aspect-square object-cover" />
+                    <img src={data.imageUrl} alt={postId} className="aspect-square object-cover w-full" />
                     <div className='bg-black bg-opacity-25 opacity-0 hover:opacity-100 cursor-pointer text-white flex items-center justify-center absolute w-full h-full top-0 gap-5'>
                         <div className='flex items-center justify-center gap-2'>
                             <span className='text-lg font-semibold'>{data.likes.length}</span>
