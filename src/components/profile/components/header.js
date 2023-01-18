@@ -27,7 +27,7 @@ export default function ProfileHeader({ username, fullName, profileUrl, postCoun
             </div>
             <div className="flex flex-col gap-3 justify-center items-center sm:items-start ">
                 <div className="flex gap-5 items-center justify-center flex-wrap">
-                    <h1 className="font-light text-2xl whitespace-nowrap">{username + ''} <span title="Verified account">{isOfficial && <img className='w-5 inline' src='/images/verified.png' alt="verified" />}</span></h1>
+                    <h1 className="font-light text-2xl whitespace-nowrap">{username + ''} <span title="Verified account">{isOfficial && <img className='w-5 inline' src={process.env.PUBLIC_URL + '/images/verified.png'} alt="verified" />}</span></h1>
                     {
                         user.username === username ?
                             <Link to={EDIT}><button className='bg-white border text-black p-2 rounded font-semibold'>Edit Profile</button></Link>
