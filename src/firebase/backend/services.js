@@ -131,7 +131,7 @@ export const submitPost = async (img, postedBy) => {
         imageUrl,
         postedBy,
         likes: [],
-        Comment: [],
+        comments: [],
         postedAt: serverTimestamp()
     })
     console.log("res", res)
