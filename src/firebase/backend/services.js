@@ -99,6 +99,11 @@ export const likePost = async (postId, username, op) => {
     updateDoc(postRef, { likes: (op ? arrayUnion(username) : arrayRemove(username)) })
 }
 
+export const commentPost = async (postId, username, comment) => {
+    const postRef = doc(db, "posts", postId)
+    updateDoc(postRef, { comments: arrayUnion({ username, comment }) })
+}
+
 
 export const uploadFile = async (path, file) => {
     const fileRef = (await uploadBytesResumable(ref(storage, path), file)).ref;
@@ -119,6 +124,7 @@ export const submitPost = async (img, postedBy) => {
         imageUrl,
         postedBy,
         likes: [],
+        Comment: [],
         postedAt: serverTimestamp()
     })
     console.log("res", res)

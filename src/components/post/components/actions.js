@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import formatTime from "../../../helpers/formatTime"
 
-export default function Actions({ likeCount, userLiked, doLike, dispatch, postedAt }) {
+
+export default function Actions({ likeCount, userLiked, doLike, dispatch }) {
 
     const [toggleLike, setToggleLike] = useState(userLiked)
     // console.log(timeStamp)
@@ -24,7 +24,7 @@ export default function Actions({ likeCount, userLiked, doLike, dispatch, posted
     }, [toggleLike])
 
     return (
-        <div className="flex items-start flex-col p-3 border-b">
+        <div className="flex items-start flex-col p-3 pb-0 ">
             <div className="flex items-start gap-x-3">
                 <svg
                     onClick={() => setToggleLike(prev => !prev)}
@@ -37,7 +37,6 @@ export default function Actions({ likeCount, userLiked, doLike, dispatch, posted
                 </svg>
             </div>
             <h1 className='font-bold pl-1 select-none'>{`${likeCount} like${likeCount === 1 ? '' : 's'}`}</h1>
-            <p className='text-gray-500 text-xs px-1'>{formatTime(postedAt)}</p>
         </div>
     )
 }

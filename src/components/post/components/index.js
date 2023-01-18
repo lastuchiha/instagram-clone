@@ -14,8 +14,8 @@ export default memo(function Post({ userId, postId }) {
         <Container isLoading={!post}>
             <Head postedBy={post?.postedBy} />
             <Body imageUrl={post?.imageUrl} />
-            <Actions {...actions} postedAt={post?.postedAt} />
-            <Comment />
+            <Actions {...actions} />
+            <Comment comments={post?.comments} postedAt={post?.postedAt} postId={postId} />
         </Container>
 
     )
