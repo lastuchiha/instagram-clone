@@ -25,13 +25,13 @@ export default function Suggestions({ username }) {
     }, [username])
 
     return (
-        <div className="p-4 hidden sm:block">
+        <section className="p-4 col-span-3 sm:col-span-1 flex items-center justify-center flex-col w-full sm:block">
             <h1 className='font-semibold'>Suggestion for you</h1>
             {state.loading ?
                 <Skeleton count={4} className="p-1 mt-1" /> :
                 state.suggestedProfiles.map(suggestedProfile => {
                     return <Suggestion key={suggestedProfile.username} profile={suggestedProfile} />
                 })}
-        </div>
+        </section>
     )
 }

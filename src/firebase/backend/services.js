@@ -1,6 +1,6 @@
 import { auth, db, storage } from "./config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
-import { addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
+import { addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, startAt, endAt, updateDoc, where, writeBatch } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 
 
@@ -39,6 +39,13 @@ export const signUpService = async (email, fullName, username, password) => {
     batch.set(usernameRef, { username: username })
 
     await batch.commit()
+}
+
+export const searchService = async (searchTerm) => {
+    const q = query(collection(db, "users"), orderBy("username"), startAt(searchTerm), endAt(searchTerm + '\uf8ff'), limit(2))
+
+    const queryResult = await getDocs(q)
+    return queryResult.docs.map(doc => doc.data())
 }
 
 export const signOutService = () => signOut(auth)

@@ -22,7 +22,7 @@ export default function ProfileHeader({ username, fullName, profileUrl, postCoun
 
     return (
         <div className='flex items-center justify-center  p-10 gap-x-20 gap-y-5 flex-wrap select-none'>
-            <div className="w-40">
+            <div className="w-40 h-40">
                 <img src={profileUrl || process.env.PUBLIC_URL + "/DEFAULT.png"} alt={username + "-profile-pic"} className="h-full aspect-square rounded-full object-cover" />
             </div>
             <div className="flex flex-col gap-3 justify-center items-center sm:items-start ">
