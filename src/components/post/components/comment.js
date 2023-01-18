@@ -24,8 +24,8 @@ export default function Comment({ comments, postedAt, postId }) {
         </li>)}
       </ul>
       <p className='text-gray-500 text-xs px-4 pb-2'>{formatTime(postedAt)}</p>
-      <form onSubmit={handleSubmit} className='flex items-center w-full pr-4 bg-lightGray border-t'>
-        <input value={comment} className='w-full p-4 outline-none grow ' placeholder='Add comment...' onChange={(e) => setComment(e.target.value)} />
+      <form onSubmit={handleSubmit} className='flex items-center w-full pr-4 bg-white border-t'>
+        <input value={comment} className='w-full p-4 outline-none grow bg-white' placeholder='Add comment...' onChange={(e) => setComment(e.target.value)} />
         <button disabled={comment === ''} className={`${comment ? 'text-blue' : 'text-gray-300'} bg-white font-semibold`}>Post</button>
       </form>
     </div>

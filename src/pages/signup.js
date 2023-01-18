@@ -40,11 +40,11 @@ export default function Signup() {
 
     return (
         <div className='flex items-center justify-center h-screen'>
-            <img className='w-[450px] hidden md:block' src="images/iphone-with-profile.jpg" alt="iphone-with-profile" />
+            <img className='w-[450px] hidden md:block' src={process.env.PUBLIC_URL + "/images/iphone-with-profile.jpg"} alt="iphone-with-profile" />
 
             <div className="flex flex-col justify-center gap-3">
                 <div className="border bg-white p-10 flex items-center justify-center flex-col  w-[350px]">
-                    <img src="images/logo.png" alt="instagram-logo" className="w-[180px] mb-9" />
+                    <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="instagram-logo" className="w-[180px] mb-9" />
 
                     <form className='flex flex-col justify-center w-full' onSubmit={handleSubmit}>
                         <input onChange={e => setEmail(e.target.value)} type="text" className="input" placeholder='Email or phone number' />

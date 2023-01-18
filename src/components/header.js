@@ -31,7 +31,7 @@ export default function Header() {
                         </li>
                         <li>
                             <Link className='block' to={generatePath(ROUTES.PROFILE, { username: user.username })}>
-                                <img src={user.profileUrl || process.env.PUBLIC_URL + "/DEFAULT.png"} className='w-6 h-6 rounded-full' />
+                                <img src={user.profileUrl || (process.env.PUBLIC_URL + "/DEFAULT.png")} className='w-6 h-6 rounded-full' />
                             </Link>
                         </li>
                         <li onClick={signOutService}>
