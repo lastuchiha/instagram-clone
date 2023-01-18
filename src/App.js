@@ -9,6 +9,7 @@ import ProtectedRoute from './components/protected-route'
 import RedirectRoute from './components/redirect-route'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Layout from './layouts';
+import NotFound from './pages/not-found';
 
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
             <Route path={ROUTES.DASHBOARD} element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path={ROUTES.EDIT} element={<ProtectedRoute><Edit /></ProtectedRoute>} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
+            <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>
